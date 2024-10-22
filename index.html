@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highzy Bio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="https://img5.pic.in.th/file/secure-sv1/3yu6tj.th.jpg" type="image/jpeg">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://i.pinimg.com/originals/b5/5b/bb/b55bbb1c81ecebb17e7b6f962d2a1083.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            overflow: hidden;
+        }
+
+        .blurred {
+            filter: blur(10px);
+            transition: filter 0.5s ease;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .texthighzy {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(90deg, red, transparent);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: colorMove 5s linear infinite;
+            text-shadow: 2px 2px 4px white;
+        }
+        
+        @keyframes colorMove {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        .welcomemsg {
+            font-size: 24px;
+            color: white;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #enter-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #00ffff;
+            border: none;
+            border-radius: 5px;
+            color: black;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .hidden {
+            display: none;
+        }
+        
+        .fade-out {
+            opacity: 0;
+        }
+
+        body {
+            cursor: url('https://cur.cursors-4u.net/cursors/images10/cur952.gif'), auto;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: 5;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            font-size: 24px;
+            transition: transform 0.2s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .ip-display {
+            position: fixed;
+            background: #FF0000;
+            bottom: 10px;
+            right: 10px;
+            color: #00ffff;
+            font-size: 16px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music">
+        <source src="highzy.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="content-wrapper">
+        <div class="container">
+            <img class="highzy" src="https://img5.pic.in.th/file/secure-sv1/3yu6tj.th.jpg" alt="" style="border-radius: 35%">
+            <h1 class='texthighzy'>Highzy</h1>
+            <p>Web Development | Designer | Creator</p>
+            <p>Chire Supreme Leader Highzy .</p>
+            <p>Find me on:</p>
+            <div class="social-icons">
+                <a href="https://discord.com/invite/zdNjNPmfFF" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://github.com/highzy-dev" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.youtube.com/@highzynakupbaby" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <button id="enter-btn">Click me</button>
+
+    <div class="ip-display" id="ip-display">IP: Loading...</div>
+
+    <script>
+        const enterButton = document.getElementById('enter-btn');
+        const overlay = document.getElementById('overlay');
+        const music = document.getElementById('background-music');
+        const ipDisplay = document.getElementById('ip-display');
+
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                ipDisplay.textContent = `IP: ${data.ip}`;
+            })
+            .catch(error => {
+                ipDisplay.textContent = 'IP: Error fetching IP';
+                console.error('Error fetching IP:', error);
+            });
+
+        enterButton.addEventListener('click', () => {
+            enterButton.classList.add('fade-out');
+            music.play();
+            overlay.style.display = 'none';
+            setTimeout(() => {
+                enterButton.classList.add('hidden');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

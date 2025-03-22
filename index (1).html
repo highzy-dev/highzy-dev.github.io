@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>highzy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&f[]=array@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #141414;
+            font-family: 'Satoshi', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(36, 36, 36, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.8s ease-in-out;
+            position: relative;
+            z-index: 1;
+            border: 2px solid rgba(43, 43, 43, 0.16);
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+            box-shadow: 0 0 16.5px #FFFFFF;
+            border: 2px solid rgba(38, 38, 38, 0.15);
+        }
+
+        .username {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            color: #FFFFFF;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .bio {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 2.5px #FFFFFF);
+        }
+
+        .social-icon:hover {
+            color: #3b82f6;
+            transform: scale(1.2);
+        }
+
+        .link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .link-btn {
+            background: rgba(255, 255, 255, 0.22);
+            color: rgba(255, 255, 255, 0.65);
+            padding: 1rem;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.22);
+        }
+
+        .link-btn:hover {
+            background: rgba(255, 255, 255, 0.32);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.32);
+        }
+
+        .discord-presence {
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .discord-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(38, 38, 38, 0.15);
+        }
+
+        .discord-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 5px #10b981;
+        }
+
+        .views {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="linesCanvas" class="canvas-bg"></canvas>
+    <div class="container">
+        <img src="https://cdn.discordapp.com/attachments/1351472039533477918/1352898391100751953/IMG_20250218_172733_099.webp?ex=67dfb050&is=67de5ed0&hm=782fa04313a3942d0082cacd046ffad3da61770263054bf04df129e7aae9fe5e&" alt="Profile" class="profile-pic">
+        <h1 class="username">highzy</h1>
+        <p class="bio">highzy - currently doing nothing</p>
+        <div class="social-icons">
+            <a href="https://discord.com/invite/zdNjNPmfFF" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+            <a href="https://t.me/" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+        <div class="discord-presence">
+            <img src="https://cdn.discordapp.com/attachments/1351472039533477918/1352898391100751953/IMG_20250218_172733_099.webp?ex=67dfb050&is=67de5ed0&hm=782fa04313a3942d0082cacd046ffad3da61770263054bf04df129e7aae9fe5e&" alt="Discord Avatar" class="discord-avatar">
+            <div>
+                <p class="text-white font-semibold">highzy</p>
+                <p class="text-gray-400 text-sm flex items-center gap-1">
+                    <span class="discord-status"></span> Online
+                </p>
+            </div>
+        </div>
+        <div class="link-list">
+            <a href="https://www.youtube.com/@highzynakupbaby" target="_blank" class="link-btn">Youtube</a>
+            <a href="https://discord.gg/emB7pkf9tR" target="_blank" class="link-btn">Discord</a>
+            <a href="https://www.instagram.com/highzynakup?igsh=M3ozdG51MGhibmFw" target="_blank" class="link-btn">Instagram</a>
+            <a href="https://discord.com/invite/zdNjNPmfFF" target="_blank" class="link-btn">Join Discord Server</a>
+        </div>
+        <br>
+        <div class="views">
+            <i class="fas fa-eye"></i> 9,999,999
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('linesCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const lines = [];
+        const numLines = 20;
+
+        class Line {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.dx = (Math.random() - 0.5) * 2;
+                this.dy = (Math.random() - 0.5) * 2;
+                this.length = Math.random() * 50 + 20;
+                this.angle = Math.random() * Math.PI * 2;
+                this.speed = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.dx * this.speed;
+                this.y += this.dy * this.speed;
+                this.angle += 0.02;
+
+                if (this.x > canvas.width + this.length) this.x = -this.length;
+                if (this.x < -this.length) this.x = canvas.width + this.length;
+                if (this.y > canvas.height + this.length) this.y = -this.length;
+                if (this.y < -this.length) this.y = canvas.height + this.length;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(59, 130, 246, 0.5)';
+                ctx.lineWidth = 2;
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(
+                    this.x + Math.cos(this.angle) * this.length,
+                    this.y + Math.sin(this.angle) * this.length
+                );
+                ctx.stroke();
+            }
+        }
+
+        for (let i = 0; i < numLines; i++) {
+            lines.push(new Line());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            lines.forEach(line => {
+                line.update();
+                line.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
